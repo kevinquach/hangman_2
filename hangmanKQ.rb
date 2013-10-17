@@ -1,4 +1,8 @@
-WORDS = %w(orange)
+WORDS = %w(abbey bagpipes cobweb daiquiri equip
+  fishhook galaxy haiku icebox jaundice kazoo larynx
+  marquis nightclub ovary pajama quartz razzmatazz
+  schizophrenia topaz unworthy vaporize walkway
+  xylophone yachtsman zephyr)
 
   @word = WORDS.sample
   @hidden_letters = Array.new(@word.length, '_').join
@@ -6,8 +10,6 @@ WORDS = %w(orange)
   @counter = 0
   @chances = 8
   @current_guess = nil
-
-puts "\nRandom word: #{@word}\n"
 
 def check_for_the_word
   if @word == @current_guess
@@ -43,9 +45,13 @@ def wrong_guess
 end
 
 def reveal_letter
+  pos = 0
 
-  index_num = @word.index(@current_guess)
-  @hidden_letters[index_num] = @current_guess
+  while(pos = @word.index(@current_guess, pos))
+    @hidden_letters[pos] = @word[pos]
+    pos += 1
+  end
+
   check_solved
 end
 
